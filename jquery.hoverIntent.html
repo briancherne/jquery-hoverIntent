@@ -71,8 +71,8 @@
 
 
 		<h2>The Future of hoverIntent</h2>
-		<p>hoverIntent r5 (the current stable version) was developed almost four years ago. It's quite stable and hasn't required an update or bug fix since then. It works with jQuery 1.1.2 through jQuery 1.5.</p>
-		<p>hoverIntent r6 (in development) will require a more modern version of jQuery. It will be backwards compatible with all current .hoverIntent() implementations and include hoverIntent custom events.</p>
+		<p>hoverIntent r5 (the current stable version) was developed almost four years ago. It's quite stable <strike>and hasn't required an update or bug fix since then</strike>. There is <a href="http://code.google.com/p/chromium/issues/detail?id=68629">a defect in Chrome 9 that improperly triggers mouseout when entering a child input[type=text] element</a>. It is compatible with jQuery 1.1.2 and later.</p>
+		<p>hoverIntent r6 (in development) will fix the Chrome 9 defect and will require a more modern version of jQuery. It will be backwards compatible with all current .hoverIntent() implementations and include hoverIntent custom events.</p>
 
 
 		<h2>Examples</h2>
@@ -150,6 +150,7 @@ $("#demo3 li").hoverIntent( config )
 
 
 		<h2>Known Bugs</h2>
+		<p>The r5 release (and all previous releases) suffer from <a href="http://code.google.com/p/chromium/issues/detail?id=68629">a defect in Chrome 9 that improperly triggers mouseout when entering a child input[type=text] element</a>.</p>
 		<p>If you place an element with onMouseOut event listeners flush against the edge of the browser chrome, sometimes Internet Explorer does not trigger an onMouseOut event immediately if your mouse leaves the document. hoverIntent does not correct for this.</p>
 		<p>Is it a bug or a feature? jQuery .hover() can take <a href="http://api.jquery.com/hover/#hover1">both a handlerIn and a handlerOut</a>, /or/ <a href="http://api.jquery.com/hover/#hover2">just a handlerIn</a>. My .hoverIntent() plug-in takes both handlerIn and handlerOut, /or/ a single configuration object. It was not designed to take just a handlerIn like .hover(). The next version (r6) will be more flexible.</p>
 		<p>Is it a bug or a feature? Because .hover() and .hoverIntent() both ignore over/out events from children nodes (using "return false") this also prevents the statusbar readout of nested anchor tag hrefs. No known fix for this is known at this time.</p>
@@ -159,7 +160,7 @@ $("#demo3 li").hoverIntent( config )
 		<h2>Release History</h2>
 		<ul>
 			<li>r6 = In development. Adding custom events.</li>
-			<li>r5 = Current stable release. Added state to prevent unmatched function calls. Compatible with jQuery 1.1.2 through jQuery 1.4.2</li>
+			<li>r5 = Current stable release. Added state to prevent unmatched function calls. This release (and previous releases) suffers from <a href="http://code.google.com/p/chromium/issues/detail?id=68629">a defect in Chrome 9 that improperly triggers mouseout when entering a child input[type=text] element</a>.</li>
 			<li>r4 = Fixed polling interval timing issue (now uses a self-calling timeout to avoid interval irregularities).</li>
 			<li>r3 = Developer-only release for debugging.</li>
 			<li>r2 = Added timeout and interval references to DOM object -- keeps timers separate from each other. Added configurable options. Added timeout option to delay onMouseOut function call. Fixed two-interval mouseOver bug (now setting pX and pY onMouseOver instead of hardcoded value).</li>
