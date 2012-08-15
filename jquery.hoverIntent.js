@@ -4,7 +4,7 @@
 * to see if the user's mouse has slowed down (beneath the sensitivity
 * threshold) before firing the onMouseOver event.
 * 
-* hoverIntent r6 // 2011.02.26 // jQuery 1.5.1+
+* hoverIntent r6 fork // 2012.07.03 // jQuery 1.7+
 * <http://cherne.net/brian/resources/jquery.hoverIntent.html>
 * 
 * hoverIntent is currently available for use in all personal or commercial 
@@ -20,7 +20,8 @@
 *	interval: 100,   // number = milliseconds of polling interval
 *	over: showNav,  // function = onMouseOver callback (required)
 *	timeout: 0,   // number = milliseconds delay before onMouseOut function call
-*	out: hideNav    // function = onMouseOut callback (required)
+*	out: hideNav,    // function = onMouseOut callback (required)
+*	selector: null // string = subSelector for use with delegated event binding. (Like jQuery.on() syntax.)
 * });
 * 
 * @param  f  onMouseOver function || An object with configuration options
@@ -33,7 +34,8 @@
 		var cfg = {
 			sensitivity: 7,
 			interval: 100,
-			timeout: 0
+			timeout: 0,
+			selector: null
 		};
 		// override configuration options with user supplied object
 		cfg = $.extend(cfg, g ? { over: f, out: g } : f );
@@ -101,6 +103,11 @@
 		};
 
 		// bind the function to the two event listeners
-		return this.bind('mouseenter',handleHover).bind('mouseleave',handleHover);
+		if(cfg.selector == null) {
+			return this.bind('mouseenter',handleHover).bind('mouseleave',handleHover);
+		}
+		else {
+			return this.on('mouseenter mouseleave', cfg.selector, handleHover);
+		}
 	};
 })(jQuery);
