@@ -23,10 +23,10 @@
  * // using a basic configuration object
  * .hoverIntent( config )
  *
- * @param  f  function OR configuration object
- * @param  g  function OR selector for delegation OR undefined
- * @param  s  selector OR undefined
- * @author    Brian Cherne <brian(at)cherne(dot)net>
+ * @param  handlerIn   function OR configuration object
+ * @param  handlerOut  function OR selector for delegation OR undefined
+ * @param  selector    selector OR undefined
+ * @author Brian Cherne <brian(at)cherne(dot)net>
  **/
 (function($) {
     $.fn.hoverIntent = function(handlerIn,handlerOut,selector) {
