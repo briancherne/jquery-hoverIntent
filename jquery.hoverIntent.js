@@ -1,9 +1,9 @@
 ﻿/**
- * hoverIntent is similar to jQuery's built-in "hover" function except that
- * instead of firing the onMouseEnter event immediately, hoverIntent checks
+ * hoverIntent is similar to jQuery's built-in "hover" method except that
+ * instead of firing the handlerIn function immediately, hoverIntent checks
  * to see if the user's mouse has slowed down (beneath the sensitivity
- * threshold) before firing the event. The onMouseLeave event is only fired
- * after a matching onMouseEnter event.
+ * threshold) before firing the event. The handlerOut function is only
+ * called after a matching handlerIn.
  *
  * hoverIntent r7 // 2013.03.11 // jQuery 1.9.1+
  * http://cherne.net/brian/resources/jquery.hoverIntent.html
