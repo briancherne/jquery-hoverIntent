@@ -1,4 +1,5 @@
-﻿/*!
+
+/*!
  * hoverIntent r7 // 2013.03.11 // jQuery 1.9.1+
  * http://cherne.net/brian/resources/jquery.hoverIntent.html
  *
@@ -6,7 +7,7 @@
  * means you are free to use hoverIntent as long as this header is left intact.
  * Copyright 2007, 2013 Brian Cherne
  */
- 
+
 /* hoverIntent is similar to jQuery's built-in "hover" method except that
  * instead of firing the handlerIn function immediately, hoverIntent checks
  * to see if the user's mouse has slowed down (beneath the sensitivity
@@ -101,15 +102,22 @@
                 if (ob.hoverIntent_s != 1) { ob.hoverIntent_t = setTimeout( function(){compare(ev,ob);} , cfg.interval );}
 
                 // else e.type == "mouseleave"
-            } else {
+            } else if(e.type == "mouseleave"){
                 // unbind expensive mousemove event
                 $(ob).off("mousemove.hoverIntent",track);
                 // if hoverIntent state is true, then call the mouseOut function after the specified delay
                 if (ob.hoverIntent_s == 1) { ob.hoverIntent_t = setTimeout( function(){delay(ev,ob);} , cfg.timeout );}
             }
+            // if touch event we don't need intent
+            if(e.type == "touchend"){
+                cfg.over.apply(ob,[ev]);
+            }
         };
 
         // listen for mouseenter and mouseleave
-        return this.on({'mouseenter.hoverIntent':handleHover,'mouseleave.hoverIntent':handleHover}, cfg.selector);
+        return this.on({'mouseenter.hoverIntent':handleHover,
+                       'mouseleave.hoverIntent':handleHover,
+                       'touchend.hoverIntent':handleHover
+                   }, cfg.selector);
     };
 })(jQuery);
