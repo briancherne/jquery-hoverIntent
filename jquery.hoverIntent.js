@@ -65,7 +65,7 @@
             if ( Math.sqrt( (pX-cX)*(pX-cX) + (pY-cY)*(pY-cY) ) < cfg.sensitivity ) {
                 $(ob).off("mousemove.hoverIntent",track);
                 // set hoverIntent state to true (so mouseOut can be called)
-                ob.hoverIntent_s = 1;
+                ob.hoverIntent_s = true;
                 return cfg.over.apply(ob,[ev]);
             } else {
                 // set previous coordinates for next time
@@ -78,7 +78,7 @@
         // A private function for delaying the mouseOut function
         var delay = function(ev,ob) {
             ob.hoverIntent_t = clearTimeout(ob.hoverIntent_t);
-            ob.hoverIntent_s = 0;
+            ob.hoverIntent_s = false;
             return cfg.out.apply(ob,[ev]);
         };
 
@@ -91,21 +91,21 @@
             // cancel hoverIntent timer if it exists
             if (ob.hoverIntent_t) { ob.hoverIntent_t = clearTimeout(ob.hoverIntent_t); }
 
-            // if e.type == "mouseenter"
-            if (e.type == "mouseenter") {
+            // if e.type === "mouseenter"
+            if (e.type === "mouseenter") {
                 // set "previous" X and Y position based on initial entry point
                 pX = ev.pageX; pY = ev.pageY;
                 // update "current" X and Y position based on mousemove
                 $(ob).on("mousemove.hoverIntent",track);
                 // start polling interval (self-calling timeout) to compare mouse coordinates over time
-                if (ob.hoverIntent_s != 1) { ob.hoverIntent_t = setTimeout( function(){compare(ev,ob);} , cfg.interval );}
+                if (!ob.hoverIntent_s) { ob.hoverIntent_t = setTimeout( function(){compare(ev,ob);} , cfg.interval );}
 
                 // else e.type == "mouseleave"
             } else {
                 // unbind expensive mousemove event
                 $(ob).off("mousemove.hoverIntent",track);
                 // if hoverIntent state is true, then call the mouseOut function after the specified delay
-                if (ob.hoverIntent_s == 1) { ob.hoverIntent_t = setTimeout( function(){delay(ev,ob);} , cfg.timeout );}
+                if (ob.hoverIntent_s) { ob.hoverIntent_t = setTimeout( function(){delay(ev,ob);} , cfg.timeout );}
             }
         };
 
