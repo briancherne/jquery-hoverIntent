@@ -35,7 +35,7 @@
         // default configuration values
         var cfg = {
             interval: 100,
-            sensitivity: 7,
+            sensitivity: 6,
             timeout: 0
         };
 
@@ -62,7 +62,7 @@
         var compare = function(ev,ob) {
             ob.hoverIntent_t = clearTimeout(ob.hoverIntent_t);
             // compare mouse positions to see if they've crossed the threshold
-            if ( ( Math.abs(pX-cX) + Math.abs(pY-cY) ) < cfg.sensitivity ) {
+            if ( Math.sqrt( (pX-cX)*(pX-cX) + (pY-cY)*(pY-cY) ) < cfg.sensitivity ) {
                 $(ob).off("mousemove.hoverIntent",track);
                 // set hoverIntent state to true (so mouseOut can be called)
                 ob.hoverIntent_s = 1;
