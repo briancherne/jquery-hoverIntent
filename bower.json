@@ -1,0 +1,17 @@
+{
+  "name": "jquery-hoverIntent",
+  "version": "1.0.0",
+  "homepage": "http://github.com/briancherne/jquery-hoverIntent",
+  "authors": [
+    "Brian Cherne <brian@chern.net>"
+  ],
+  "description": "A plugin that attemps to determine the user's intent.",
+  "main": "jquery.hoverIntent.js",
+  "keywords": [
+    "jquery",
+    "hover",
+    "intent",
+    "plugin"
+  ],
+  "license": "MIT"
+}
