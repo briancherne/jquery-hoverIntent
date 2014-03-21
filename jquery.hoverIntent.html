@@ -35,6 +35,19 @@
                 out: makeShort,
                 selector: 'li'
             });
+            $("#demo7 li").hoverIntent({
+                over: makeTall,
+                out: makeShort,
+                interval: 500,
+                outInterval: 0
+            });
+            $("#demo8 li").hoverIntent({
+                over: makeTall,
+                out: makeShort,
+                interval: 100,
+                timeout: 1000,
+                detectIntentOnMouseLeave: false
+            });
         }); // close document.ready
 
         function makeTall(){$(this).animate({"height":75},200);}
@@ -137,6 +150,40 @@ $("#demo6").hoverIntent({
         </ul>
         <p>To control hoverIntent more precisely and override the default configuration options, pass it an object as the first parameter. The object must at least contain an "over" function. If the "over" function is sent alone, it will act just like handlerInOut.</p>
 
+        <h3>.hoverIntent( object ) with over and out intervals</h3>
+        <pre>
+        $("#demo7 li").hoverIntent({
+            over: makeTall,
+            out: makeShort,
+            interval: 500,
+            outInterval: 0
+        });
+        </pre>
+        <ul class="demo" id="demo7">
+            <li class="p1">&nbsp;</li>
+            <li class="p2">&nbsp;</li>
+            <li class="p3">&nbsp;</li>
+            <li class="p4">&nbsp;</li>
+        </ul>
+        <p>By default the mouseleave interval is the same as the mouseenter. You can override the default by passing in an outInterval int value.</p>
+
+        <h3>.hoverIntent( object ) with over and out intervals</h3>
+        <pre>
+        $("#demo8 li").hoverIntent({
+            over: makeTall,
+            out: makeShort,
+            interval: 100,
+            timeout: 1000,
+            detectIntentOnMouseLeave: false
+        });
+        </pre>
+        <ul class="demo" id="demo8">
+            <li class="p1">&nbsp;</li>
+            <li class="p2">&nbsp;</li>
+            <li class="p3">&nbsp;</li>
+            <li class="p4">&nbsp;</li>
+        </ul>
+        <p>To preserve the original functionality you can set detectIntentOnMouseLeave to false. This will then use the original delay() function that delays the event handler by the number of milliseconds set by timeout.</p>
 
         <h2>Common Configuration Options</h2>
         <p>These are the common options you'll want to use. Note, nothing prevents you from sending <a href="http://api.jquery.com/jQuery.noop/">an empty function</a> as the handlerIn or handlerOut functions.</p>
