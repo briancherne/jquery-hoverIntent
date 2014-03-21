@@ -7,6 +7,9 @@ Why? To delay or prevent the accidental firing of animations or ajax calls. Simp
 
 For more information, visit [http://cherne.net/brian/resources/jquery.hoverIntent.html](http://cherne.net/brian/resources/jquery.hoverIntent.html)
 
-Specific to this fork intent is detected on mouseenter and mouseleave. Currently this is specifically designed to ensure that drop down menus don't close accidentally and improves upon the simple delay of the original script.
-
-I intend to add separate parameters for the out event's interval and sensitivity then another to disable intent on out and revert to using the delay.
+## mouseleave fork
+Specific to this fork the user's intent is detected on mouseenter ***and mouseleave***.
+This was specifically designed ensuring drop down menus don't close accidentally but should work in any similar scenario.
+- Added detection of user's intent on mouseleave
+- Added config parma for the mouseleave interval (defaults to using the mouseenter interval if not specified)
+- Added detectIntentOnMouseLeave param which when set to false disables the detection of intent on mouseleave and reverts to the original delay function
