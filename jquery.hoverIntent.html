@@ -1,7 +1,7 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta http-equiv="imagetoolbar" content="no" />
     <title>hoverIntent jQuery Plug-in</title>
     <link rel="stylesheet" type="text/css" href="/cherne.css" />
@@ -158,7 +158,7 @@ $("#demo6").hoverIntent({
         <p>Modify these if you are brave, test tirelessly, and completely understand what you are doing. When choosing the default settings for hoverIntent I tried to find the best possible balance between responsiveness and frequency of false positives.</p>
 
         <h3>sensitivity:</h3>
-        <p>If the mouse travels fewer than this number of pixels between polling intervals, then the "over" function will be called. With the minimum sensitivity threshold of 1, the mouse must not move between polling intervals. With higher sensitivity thresholds you are more likely to receive a false positive. <em>Default sensitivity: 7</em></p>
+        <p>If the mouse travels fewer than this number of pixels between polling intervals, then the "over" function will be called. With the minimum sensitivity threshold of 1, the mouse must not move between polling intervals. With higher sensitivity thresholds you are more likely to receive a false positive. Note that hoverIntent r7 and earlier perform this comparison using rectilinear distance, whereas more recent versions compare against euclidean (straight-line) distance for better accuracy and intuition. If you are upgrading from an older version, you may want to verify that the desired behavior is preserved. <em>Default sensitivity: 6</em></p>
 
         <h3>interval:</h3>
         <p>The number of milliseconds hoverIntent waits between reading/comparing mouse coordinates. When the user's mouse first enters the element its coordinates are recorded. The soonest the "over" function can be called is after a single polling interval. Setting the polling interval higher will increase the delay before the first possible "over" call, but also increases the time to the next point of comparison. <em>Default interval: 100</em></p>
