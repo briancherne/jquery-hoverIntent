@@ -85,7 +85,7 @@
         // A private function for handling mouse 'hovering'
         var handleHover = function(e) {
             // copy objects to be passed into t (required for event object to be passed in IE)
-            var ev = jQuery.extend({},e);
+            var ev = $.extend({},e);
             var ob = this;
 
             // cancel hoverIntent timer if it exists
