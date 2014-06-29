@@ -1,4 +1,4 @@
-﻿/*!
+/*!
  * hoverIntent r8 // 2014.06.29 // jQuery 1.9.1+
  * http://cherne.net/brian/resources/jquery.hoverIntent.html
  *
