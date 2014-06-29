@@ -1,0 +1,7 @@
+{
+  "name": "jquery-hoverIntent",
+  "version": "0.0.7",
+  "main": "./jquery.hoverIntent.js",
+  "dependencies": {
+  }
+}
