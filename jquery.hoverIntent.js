@@ -6,7 +6,7 @@
  * means you are free to use hoverIntent as long as this header is left intact.
  * Copyright 2007, 2014 Brian Cherne
  */
- 
+
 /* hoverIntent is similar to jQuery's built-in "hover" method except that
  * instead of firing the handlerIn function immediately, hoverIntent checks
  * to see if the user's mouse has slowed down (beneath the sensitivity
@@ -29,7 +29,13 @@
  * @param  selector    selector OR undefined
  * @author Brian Cherne <brian(at)cherne(dot)net>
  */
-(function($) {
+
+(function(factory) {
+    if (typeof define === 'function' && define.amd)
+        define(['jquery'], factory);
+    else if (jQuery && !jQuery.fn.hoverIntent)
+        factory(jQuery);
+})(function($) {
     $.fn.hoverIntent = function(handlerIn,handlerOut,selector) {
 
         // default configuration values
@@ -112,4 +118,4 @@
         // listen for mouseenter and mouseleave
         return this.on({'mouseenter.hoverIntent':handleHover,'mouseleave.hoverIntent':handleHover}, cfg.selector);
     };
-})(jQuery);
+});
