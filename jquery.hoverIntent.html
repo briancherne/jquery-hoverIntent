@@ -30,15 +30,17 @@
             $("#demo3 li").hoverIntent(toggleHeight);
             $("#demo4").hoverIntent(makeTall,makeShort,'li');
             $("#demo5").hoverIntent(toggleHeight,'li');
-            $("#demo6").hoverIntent({
+            $("#demo6").hoverIntent(makeTall,makeShort,'li','your dreams are mine now');
+            $("#demo7").hoverIntent({
                 over: makeTall,
                 out: makeShort,
-                selector: 'li'
+                selector: 'li',
+                data: 'your dreams are mine now'
             });
         }); // close document.ready
 
-        function makeTall(){$(this).animate({"height":75},200);}
-        function makeShort(){$(this).animate({"height":50},200);}
+        function makeTall(e){$(this).animate({"height":75},200).text(e.data);}
+        function makeShort(){$(this).animate({"height":50},200).text('');}
         function toggleHeight(){var h=(parseInt($(this).css('height'),10) > 50) ? 50 : 75; $(this).animate({"height":h},200);}
     </script>
 
@@ -117,15 +119,29 @@
         </ul>
         <p>Unlike jQuery's hover, hoverIntent supports event delegation with handlerInOut.</p>
 
+        <h3>.hoverIntent( handlerIn, handlerOut, selector, data )<br />
+        .hoverIntent( handlerIn, handlerOut, data )<br />
+        .hoverIntent( handlerInOut, selector, data )<br />
+        .hoverIntent( handlerInOut, data )</h3>
+        <pre>$("#demo6").hoverIntent( handlerIn, handlerOut, 'li', 'Your dreams are mine now.' );</pre>
+        <ul class="demo" id="demo6">
+            <li class="p1">&nbsp;</li>
+            <li class="p2">&nbsp;</li>
+            <li class="p3">&nbsp;</li>
+            <li class="p4">&nbsp;</li>
+        </ul>
+        <br />
+
         <h3>.hoverIntent( object )</h3>
 <pre>
-$("#demo6").hoverIntent({
+$("#demo7").hoverIntent({
     over: makeTall,
     out: makeShort,
-    selector: 'li'
+    selector: 'li',
+    data: 'Your dreams are mine now'
 });
 </pre>
-        <ul class="demo" id="demo6">
+        <ul class="demo" id="demo7">
             <li class="p1">&nbsp;</li>
             <li class="p2">&nbsp;</li>
             <li class="p3">&nbsp;</li>
@@ -148,6 +164,9 @@ $("#demo6").hoverIntent({
 
         <h3>selector:</h3>
         <p>A selector string for event delegation. Used to filter the descendants of the selected elements that trigger the event. If the selector is null or omitted, the event is always triggered when it reaches the selected element. Read <a href="http://api.jquery.com/on/#direct-and-delegated-events">jQuery's API Documentation for the .on() method</a> for more information.</p>
+
+        <h3>data:</h3>
+        <p>Data to be passed to the handler in event.data when an event occurs. The data argument can be any type, but if a string is used the "selector" must either be provided or explicitly passed as null so that the data is not mistaken for a selector. Read <a href="http://api.jquery.com/on/#passing-data">jQuery's API Documentation for the .on() method</a> for more information.</p>
 
 
         <h2>Advanced Configuration Options</h2>

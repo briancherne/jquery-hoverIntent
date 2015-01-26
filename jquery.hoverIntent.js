@@ -21,16 +21,23 @@
  * .hoverIntent( handlerIn, handlerOut, selector )
  * .hoverIntent( handlerInOut, selector )
  *
+ * // basic usage ... with event data and/or event delegation!
+ * .hoverIntent( handlerIn, handlerOut, selector, data )
+ * .hoverIntent( handlerIn, handlerOut, data )
+ * .hoverIntent( handlerInOut, selector, data )
+ * .hoverIntent( handlerInOut, data )
+ *
  * // using a basic configuration object
  * .hoverIntent( config )
  *
  * @param  handlerIn   function OR configuration object
- * @param  handlerOut  function OR selector for delegation OR undefined
- * @param  selector    selector OR undefined
+ * @param  handlerOut  function OR selector OR data OR undefined
+ * @param  selector    selector OR data OR undefined
+ * @param  data        data OR undefined
  * @author Brian Cherne <brian(at)cherne(dot)net>
  */
 (function($) {
-    $.fn.hoverIntent = function(handlerIn,handlerOut,selector) {
+    $.fn.hoverIntent = function(handlerIn,handlerOut,selector,data) {
 
         // default configuration values
         var cfg = {
@@ -38,14 +45,30 @@
             sensitivity: 6,
             timeout: 0
         };
+				
+        // re-align inputs
+        if (typeof handlerIn !== "object") {
+            if (typeof handlerOut === "string") {
+                data = selector;
+                selector = handlerOut;
+                handlerOut = handlerIn;
+            } else if (handlerOut == null) {
+                handlerOut = handlerIn;
+            } else if (!$.isFunction(handlerOut)) {
+                data = handlerOut;
+                handlerOut = handlerIn;
+                selector = void 0;
+            }
 
-        if ( typeof handlerIn === "object" ) {
-            cfg = $.extend(cfg, handlerIn );
-        } else if ($.isFunction(handlerOut)) {
-            cfg = $.extend(cfg, { over: handlerIn, out: handlerOut, selector: selector } );
-        } else {
-            cfg = $.extend(cfg, { over: handlerIn, out: handlerIn, selector: handlerOut } );
+            if (typeof selector !== "string" && selector != null) {
+                data = selector;
+                selector = void 0;
+            }
+
+            handlerIn = { over: handlerIn, out: handlerOut, selector: selector, data: data };
         }
+				
+        cfg = $.extend(cfg, handlerIn);
 
         // instantiate variables
         // cX, cY = current X and Y position of mouse, updated by mousemove event
@@ -110,6 +133,6 @@
         };
 
         // listen for mouseenter and mouseleave
-        return this.on({'mouseenter.hoverIntent':handleHover,'mouseleave.hoverIntent':handleHover}, cfg.selector);
+        return this.on({'mouseenter.hoverIntent':handleHover,'mouseleave.hoverIntent':handleHover}, cfg.selector, cfg.data);
     };
 })(jQuery);
