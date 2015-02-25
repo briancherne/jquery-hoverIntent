@@ -39,8 +39,10 @@
 (function ($) {
 
     // Variables Descriptions
-    // cX, cY = current X and Y position of mouse, updated by mousemove event
-    // pX, pY = previous X and Y position of mouse, set by mouseover and polling interval
+    // x, y = current X and Y position of mouse, updated by mousemove event
+    // i, j = previous X and Y position of mouse, set by mouseover and polling interval
+    // t, t = contains the timer id.
+    // s, s = indicates the hover state.
 
     // default configuration values
     var _cfg = {
@@ -51,30 +53,30 @@
 
     // A private function for getting mouse position
     function _track(ev) {
-        ev.data.cX = ev.pageX;
-        ev.data.cY = ev.pageY;
+        ev.data.x = ev.pageX;
+        ev.data.y = ev.pageY;
     };
 
     // A private function for comparing current and previous mouse position
     function _compare(ev, ob, cfg) {
-        cfg.hoverIntent_t = clearTimeout(cfg.hoverIntent_t);
+        cfg.t = clearTimeout(cfg.t);
 
         // compare mouse positions to see if they've crossed the threshold
-        if (Math.sqrt((cfg.pX - cfg.cX) * (cfg.pX - cfg.cX) + (cfg.pY - cfg.cY) * (cfg.pY - cfg.cY)) < cfg.sensitivity) {
+        if (Math.sqrt((cfg.i - cfg.x) * (cfg.i - cfg.x) + (cfg.j - cfg.y) * (cfg.j - cfg.y)) < cfg.sensitivity) {
             $(ob).off("mousemove.hoverIntent", cfg, _track);
 
             // set hoverIntent state to true (so mouseOut can be called)
-            cfg.hoverIntent_s = true;
+            cfg.s = true;
 
             return cfg.over.apply(ob, [ev]);
         }
         else {
             // set previous coordinates for next time
-            cfg.pX = cfg.cX;
-            cfg.pY = cfg.cY;
+            cfg.i = cfg.x;
+            cfg.j = cfg.y;
 
             // use self-calling timeout, guarantees intervals are spaced out properly (avoids JavaScript timer bugs)
-            cfg.hoverIntent_t = setTimeout(function () {
+            cfg.t = setTimeout(function () {
                 _compare(ev, ob, cfg);
             }, cfg.interval);
         }
@@ -82,8 +84,8 @@
 
     // A private function for delaying the mouseOut function
     function _delay(ev, ob, cfg) {
-        cfg.hoverIntent_t = clearTimeout(cfg.hoverIntent_t);
-        cfg.hoverIntent_s = false;
+        cfg.t = clearTimeout(cfg.t);
+        cfg.s = false;
 
         return cfg.out.apply(ob, [ev]);
     };
@@ -129,22 +131,22 @@
                 ob = this;
 
             // cancel hoverIntent timer if it exists
-            if (cfg.hoverIntent_t) {
-                cfg.hoverIntent_t = clearTimeout(cfg.hoverIntent_t);
+            if (cfg.t) {
+                cfg.t = clearTimeout(cfg.t);
             }
 
             // if e.type === "mouseenter"
             if (e.type === "mouseenter") {
                 // set "previous" X and Y position based on initial entry point
-                cfg.pX = ev.pageX;
-                cfg.pY = ev.pageY;
+                cfg.i = ev.pageX;
+                cfg.j = ev.pageY;
 
                 // update "current" X and Y position based on mousemove
                 $(ob).on("mousemove.hoverIntent", cfg, _track);
 
                 // start polling interval (self-calling timeout) to compare mouse coordinates over time
-                if (!cfg.hoverIntent_s) {
-                    cfg.hoverIntent_t = setTimeout(function () {
+                if (!cfg.s) {
+                    cfg.t = setTimeout(function () {
                         _compare(ev, ob, cfg);
                     }, cfg.interval);
                 }
@@ -155,8 +157,8 @@
                 $(ob).off("mousemove.hoverIntent", cfg, _track);
 
                 // if hoverIntent state is true, then call the mouseOut function after the specified delay
-                if (cfg.hoverIntent_s) {
-                    cfg.hoverIntent_t = setTimeout(function () {
+                if (cfg.s) {
+                    cfg.t = setTimeout(function () {
                         _delay(ev, ob, cfg);
                     }, cfg.timeout);
                 }
