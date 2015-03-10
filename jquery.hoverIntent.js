@@ -41,8 +41,8 @@
     // Variables Descriptions
     // x, y = current X and Y position of mouse, updated by mousemove event
     // i, j = previous X and Y position of mouse, set by mouseover and polling interval
-    // t, t = contains the timer id.
-    // s, s = indicates the hover state.
+    // t = contains the timer id.
+    // s = indicates the hover state.
 
     // default configuration values
     var _cfg = {
