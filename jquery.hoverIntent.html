@@ -39,7 +39,7 @@
 
         function makeTall(){$(this).animate({"height":75},200);}
         function makeShort(){$(this).animate({"height":50},200);}
-        function toggleHeight(){var h=(parseInt($(this).css('height'),10) > 50) ? 50 : 75; $(this).animate({"height":h},200);}
+        function toggleHeight(e){var h=(e.type==="mouseenter") ? 75 : 50; $(this).stop().animate({"height":h},200);}
     </script>
 
 </head>
@@ -134,7 +134,7 @@ $("#demo6").hoverIntent({
         <p>To control hoverIntent more precisely and override the default configuration options, pass it an object as the first parameter. The object must at least contain an "over" function. If the "over" function is sent alone, it will act just like handlerInOut.</p>
 
 
-        <h2>Common Configuration Options</h2>
+        <h2 id="options">Common Configuration Options</h2>
         <p>These are the common options you'll want to use. Note, nothing prevents you from sending <a href="http://api.jquery.com/jQuery.noop/">an empty function</a> as the handlerIn or handlerOut functions.</p>
 
         <h3>over:</h3>
@@ -150,7 +150,7 @@ $("#demo6").hoverIntent({
         <p>A selector string for event delegation. Used to filter the descendants of the selected elements that trigger the event. If the selector is null or omitted, the event is always triggered when it reaches the selected element. Read <a href="http://api.jquery.com/on/#direct-and-delegated-events">jQuery's API Documentation for the .on() method</a> for more information.</p>
 
 
-        <h2>Advanced Configuration Options</h2>
+        <h2 id="advanced">Advanced Configuration Options</h2>
         <p>Modify these if you are brave, test tirelessly, and completely understand what you are doing. When choosing the default settings for hoverIntent I tried to find the best possible balance between responsiveness and frequency of false positives.</p>
 
         <h3>sensitivity:</h3>
@@ -169,11 +169,13 @@ $("#demo6").hoverIntent({
             $("#chrome9defect").hoverIntent(enter,leave);
         </script>
         <p>If you place an element flush against the edge of the browser chrome, sometimes Internet Explorer does not trigger a "mouseleave" event if your cursor leaves the element/browser in that direction. hoverIntent cannot correct for this.</p>
-        <p>Please email me <strong>brian(at)cherne(dot)net</strong> if you have questions or would like to notify me of any defects.</p>
+        <p>Please visit <a href="https://github.com/briancherne/jquery-hoverIntent/issues">the issue tracker</a> or email me <strong>brian(at)cherne(dot)net</strong> if you have questions or would like to notify me of any defects.</p>
 
-        <h2>Release History</h2>
+        <h2 id="releases">Release History</h2>
         <ul>
-            <li>v1.8.0 = (2014) Changed to <a href="http://semver.org">Semantic Versioning</a> (from r8 to v1.8.0). Removed <a href="https://en.wikipedia.org/wiki/Zero-width_no-break_space">U+FEFF character</a> from beginning of JS file. Removed stray "jQuery" in favor of "$" for noConflict situations. Changed measurements to use euclidean (instead of rectilinear) distance. Thanks to github community for patches, suggestions, and fixes!</li>
+            <li>v1.9.0 = (2015) Refactored plugin to fix a long-standing bug that prevented multiple instances of the plugin to be active on the same element.</li>
+            <li>v1.8.1 = (2014) Minor update: fixes bower.json to indicate that the plugin works with all versions of jQuery >= 1.9.1.</li>
+            <li>v1.8.0 = (2014) Changed to <a href="http://semver.org">Semantic Versioning</a> (from r8 to v1.8.0). Removed <a href="https://en.wikipedia.org/wiki/Zero-width_no-break_space">U+FEFF character</a> from beginning of JS file. Removed stray "jQuery" in favor of "$" for noConflict situations. Changed measurements to use euclidean (instead of rectilinear) distance. Thanks to <a href="https://github.com/briancherne/jquery-hoverIntent/graphs/contributors">the GitHub community</a> for patches, suggestions, and fixes!</li>
             <li>r7 = (2013) Added event delegation via "selector" param/property. Added namespaced events for better isolation. Added handlerInOut support.</li>
             <li>r6 = (2011) Identical to r5 except that the Google Chrome defect is fixed once you upgrade to jQuery 1.5.1 (or later).</li>
             <li>r5 = (2007) Added state to prevent unmatched function calls. This and previous releases suffer from <a href="http://code.google.com/p/chromium/issues/detail?id=68861">a defect in Google Chrome that improperly triggers mouseout when entering a child input[type=text] element</a>.</li>
