@@ -173,7 +173,7 @@ $("#demo6").hoverIntent({
 
         <h2 id="releases">Release History</h2>
         <ul>
-            <li>v1.9.0 = (2015) Refactored plugin to fix a long-standing bug that prevented multiple instances of the plugin to be active on the same element.</li>
+            <li>v1.9.0 = (2015) Refactored plugin to fix a long-standing bug that prevented multiple instances of the plugin to be active on the same element. Exports plugin as an <a href="http://requirejs.org/docs/whyamd.html">AMD</a> module so it can be used with AMD loaders.</li>
             <li>v1.8.1 = (2014) Minor update: fixes bower.json to indicate that the plugin works with all versions of jQuery >= 1.9.1.</li>
             <li>v1.8.0 = (2014) Changed to <a href="http://semver.org">Semantic Versioning</a> (from r8 to v1.8.0). Removed <a href="https://en.wikipedia.org/wiki/Zero-width_no-break_space">U+FEFF character</a> from beginning of JS file. Removed stray "jQuery" in favor of "$" for noConflict situations. Changed measurements to use euclidean (instead of rectilinear) distance. Thanks to <a href="https://github.com/briancherne/jquery-hoverIntent/graphs/contributors">the GitHub community</a> for patches, suggestions, and fixes!</li>
             <li>r7 = (2013) Added event delegation via "selector" param/property. Added namespaced events for better isolation. Added handlerInOut support.</li>
