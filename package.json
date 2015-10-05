@@ -1,6 +1,6 @@
 {
   "name": "jquery-hoverintent",
-  "version": "1.8.1",
+  "version": "1.8.2",
   "description": "A jQuery plug-in that attempts to determine the user's intent on mouseover. To delay or prevent the accidental firing of callbacks.",
   "main": "jquery.hoverIntent.js",
   "scripts": {
