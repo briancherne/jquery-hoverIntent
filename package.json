@@ -1,0 +1,19 @@
+{
+  "name": "jquery-hoverintent",
+  "version": "1.8.1",
+  "description": "A jQuery plug-in that attempts to determine the user's intent on mouseover. To delay or prevent the accidental firing of callbacks.",
+  "main": "jquery.hoverIntent.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tacitknowledge/jquery-hoverIntent.git"
+  },
+  "author": "Nick Messing <dot.nick.dot.messing@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tacitknowledge/jquery-hoverIntent/issues"
+  },
+  "homepage": "https://github.com/tacitknowledge/jquery-hoverIntent#readme"
+}
