@@ -63,7 +63,7 @@
     var compare = function(ev,$el,s,cfg) {
         // compare mouse positions to see if pointer has slowed enough to trigger `over` function
         if ( Math.sqrt( (s.pX-cX)*(s.pX-cX) + (s.pY-cY)*(s.pY-cY) ) < cfg.sensitivity ) {
-            $el.off('mousemove.hoverIntent'+s.namespace,track);
+            $el.off(s.event,track);
             delete s.timeoutId;
             // set hoverIntent state as active for this element (permits `out` handler to trigger)
             s.isActive = true;
@@ -121,13 +121,13 @@
             // timeoutId = timeout ID, reused for tracking mouse position and delaying "out" handler
             // isActive = plugin state, true after `over` is called just until `out` is called
             // pX, pY = previously-measured pointer coordinates, updated at each polling interval
-            // namespace = string used as namespace for per-instance event management
+            // event = string representing the namespaced event used for mouse tracking
 
             // clear any existing timeout
             if (state.timeoutId) { state.timeoutId = clearTimeout(state.timeoutId); }
 
-            // event namespace, used to register and unregister mousemove tracking
-            var namespace = state.namespace = '.hoverIntent'+instanceId;
+            // namespaced event used to register and unregister mousemove tracking
+            var mousemove = state.event = 'mousemove.hoverIntent.hoverIntent'+instanceId;
 
             // handle the event, based on its type
             if (e.type === 'mouseenter') {
@@ -136,14 +136,14 @@
                 // set "previous" X and Y position based on initial entry point
                 state.pX = ev.pageX; state.pY = ev.pageY;
                 // update "current" X and Y position based on mousemove
-                $el.on('mousemove.hoverIntent'+namespace,track);
+                $el.off(mousemove,track).on(mousemove,track);
                 // start polling interval (self-calling timeout) to compare mouse coordinates over time
                 state.timeoutId = setTimeout( function(){compare(ev,$el,state,cfg);} , cfg.interval );
             } else { // "mouseleave"
                 // do nothing if not already active
                 if (!state.isActive) { return; }
                 // unbind expensive mousemove event
-                $el.off('mousemove.hoverIntent'+namespace,track);
+                $el.off(mousemove,track);
                 // if hoverIntent state is true, then call the mouseOut function after the specified delay
                 state.timeoutId = setTimeout( function(){delay(ev,$el,state,cfg.out);} , cfg.timeout );
             }
