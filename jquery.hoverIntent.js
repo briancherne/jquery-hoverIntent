@@ -53,7 +53,7 @@
     // current X and Y position of mouse, updated during mousemove tracking (shared across instances)
     var cX, cY;
 
-    // saves the current pointer position coordinated based on the given mouse event
+    // saves the current pointer position coordinates based on the given mousemove event
     var track = function(ev) {
         cX = ev.pageX;
         cY = ev.pageY;
@@ -65,9 +65,11 @@
         if ( Math.sqrt( (s.pX-cX)*(s.pX-cX) + (s.pY-cY)*(s.pY-cY) ) < cfg.sensitivity ) {
             $el.off('mousemove.hoverIntent'+s.namespace,track);
             delete s.timeoutId;
-            // set hoverIntent state as active for this element (so `out` handler can eventually be called)
+            // set hoverIntent state as active for this element (permits `out` handler to trigger)
             s.isActive = true;
-            // clear coordinate data
+            // overwrite old mouseenter event coordinates with most recent pointer position
+            ev.pageX = cX; ev.pageY = cY;
+            // clear coordinate data from state object
             delete s.pX; delete s.pY;
             return cfg.over.apply($el[0],[ev]);
         } else {
