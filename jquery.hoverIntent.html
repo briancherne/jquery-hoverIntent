@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <title>hoverIntent jQuery Plug-in</title>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="./jquery.hoverIntent.js"></script>
 
     <!-- LAYOUT CSS // NOT REQUIRED for hoverIntent, just for prettification -->
@@ -56,7 +56,6 @@
 </head>
 
 <body>
-
     <h1>What is hoverIntent?</h1>
     <p>hoverIntent is a plug-in that attempts to determine the user's intent... like a crystal ball, only with mouse movement! It is similar to <a href="http://api.jquery.com/hover/">jQuery's hover method</a>. However, instead of calling the handlerIn function immediately, hoverIntent waits until the user's mouse slows down enough before making the call.</p>
     <p>Why? To delay or prevent the accidental firing of animations or ajax calls. Simple timeouts work for small areas, but if your target area is large it may execute regardless of intent. That's where hoverIntent comes in...</p>
@@ -148,7 +147,7 @@ $("#demo6").hoverIntent({
     <p>A selector string for event delegation. Used to filter the descendants of the selected elements that trigger the event. If the selector is null or omitted, the event is always triggered when it reaches the selected element. Read <a href="http://api.jquery.com/on/#direct-and-delegated-events">jQuery's API Documentation for the .on() method</a> for more information.</p>
 
     <h1>Advanced Configuration Options</h1>
-    <p><b style="color:#600">Modify these only if you are brave, test tirelessly, and completely understand what you are doing.</b> When choosing the default settings for hoverIntent I tried to find the best possible balance between responsiveness and frequency of false positives.</p>
+    <p><strong style="color:#600">Modify these only if you are brave, test tirelessly, and completely understand what you are doing.</strong> When choosing the default settings for hoverIntent I tried to find the best possible balance between responsiveness and frequency of false positives.</p>
 
     <h2 style="color:#600">sensitivity:</h2>
     <p>If the mouse travels fewer than this number of pixels between polling intervals, then the "over" function will be called. With the minimum sensitivity threshold of 1, the mouse must not move between polling intervals. With higher sensitivity thresholds you are more likely to receive a false positive. Note that hoverIntent r7 and earlier perform this comparison using rectilinear distance, whereas more recent versions compare against euclidean (straight-line) distance for better accuracy and intuition. If you are upgrading from an older version, you may want to verify that the desired behavior is preserved. <em>Default sensitivity: 6</em></p>
@@ -168,8 +167,9 @@ $("#demo6").hoverIntent({
 
     <h1>Release History</h1>
     <ul>
-        <li>v1.9.0 = (2015) Refactored plugin to fix a long-standing bug that prevented multiple instances of the plugin to be active on the same element. Exports plugin as an <a href="http://requirejs.org/docs/whyamd.html">AMD</a> module so it can be used with AMD loaders. The <code>pageX</code> and <code>pageY</code> properties of the event passed to the "over" handler now reflect current mouse position. Note that this may be a breaking change for some; if your "over" handler requires the unmodified coordinates from original mouseover, you can read them from the <code>event.originalEvent</code>.</li>
-        <li>v1.8.1 = (2014) Minor update: fixes bower.json to indicate that the plugin works with all versions of jQuery >= 1.9.1.</li>
+        <li><a href="https://github.com/briancherne/jquery-hoverIntent/releases">All newer releases</a></li>
+        <li>v1.9.0 = (2015) Refactored plugin to fix a long-standing bug that prevented multiple instances of the plugin to be active on the same element. Exports plugin as an <a href="http://requirejs.org/docs/whyamd.html">AMD</a> module so it can be used with AMD loaders. The <code>pageX</code> and <code>pageY</code> properties of the event passed to the "over" handler now reflect current mouse position. <em>Note that this may be a breaking change for some; if your "over" handler requires the unmodified coordinates from original mouseover, you can read them from the <code>event.originalEvent</code></em>. Many other improvements and bug fixes.</li>
+        <li>v1.8.1 = (2014) Minor update: fixes bower.json to indicate that the plugin works with all versions of jQuery &gt;= 1.9.1.</li>
         <li>v1.8.0 = (2014) Changed to <a href="http://semver.org">Semantic Versioning</a> (from r8 to v1.8.0). Removed <a href="https://en.wikipedia.org/wiki/Zero-width_no-break_space">U+FEFF character</a> from beginning of JS file. Removed stray "jQuery" in favor of "$" for noConflict situations. Changed measurements to use euclidean (instead of rectilinear) distance. Thanks to <a href="https://github.com/briancherne/jquery-hoverIntent/graphs/contributors">the GitHub community</a> for patches, suggestions, and fixes!</li>
         <li>r7 = (2013) Added event delegation via "selector" param/property. Added namespaced events for better isolation. Added handlerInOut support.</li>
         <li>r6 = (2011) Identical to r5 except that the Google Chrome defect is fixed once you upgrade to jQuery 1.5.1 (or later).</li>
