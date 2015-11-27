@@ -93,8 +93,11 @@
         // extend the default configuration and parse parameters
         var cfg = $.extend({}, _cfg);
         if ( $.isPlainObject(handlerIn) ) {
-            cfg = $.extend(cfg, handlerIn );
-        } else if ($.isFunction(handlerOut)) {
+            cfg = $.extend(cfg, handlerIn);
+            if ( !$.isFunction(cfg.out) ) {
+                cfg.out = cfg.over;
+            }
+        } else if ( $.isFunction(handlerOut) ) {
             cfg = $.extend(cfg, { over: handlerIn, out: handlerOut, selector: selector } );
         } else {
             cfg = $.extend(cfg, { over: handlerIn, out: handlerIn, selector: handlerOut } );
