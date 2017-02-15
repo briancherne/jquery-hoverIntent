@@ -33,12 +33,20 @@
 ;(function(factory) {
     'use strict';
     if (typeof define === 'function' && define.amd) {
-        define(['jquery'], factory);
+        define(function () {
+            return factory
+        });
+    } else if (typeof module === 'object' && typeof module.exports === 'object') {
+        module.exports = factory;
     } else if (jQuery && !jQuery.fn.hoverIntent) {
         factory(jQuery);
     }
 })(function($) {
     'use strict';
+
+    if ($.fn.hoverIntent) {
+        return;
+    }
 
     // default configuration values
     var _cfg = {
