@@ -30,7 +30,7 @@
  * @author Brian Cherne <brian(at)cherne(dot)net>
  */
 
-(function(factory) {
+;(function(factory) {
     'use strict';
     if (typeof define === 'function' && define.amd) {
         define(['jquery'], factory);
