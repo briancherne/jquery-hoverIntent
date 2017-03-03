@@ -83,7 +83,7 @@
     // triggers given `out` function at configured `timeout` after a mouseleave and clears state
     var delay = function(ev,$el,s,out) {
         delete $el.data('hoverIntent')[s.id];
-        return out.apply($el[0],[ev]);
+        if (out) out.apply($el[0],[ev]);
     };
 
     $.fn.hoverIntent = function(handlerIn,handlerOut,selector) {
