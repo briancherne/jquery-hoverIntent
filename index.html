@@ -64,6 +64,7 @@
     <h2>What is hoverIntent?</h2>
     <p>hoverIntent is a plug-in that attempts to determine the user's intent... like a crystal ball, only with mouse movement! It is similar to <a href="http://api.jquery.com/hover/">jQuery's hover method</a>. However, instead of calling the handlerIn function immediately, hoverIntent waits until the user's mouse slows down enough before making the call.</p>
     <p>Why? To delay or prevent the accidental firing of animations or ajax calls. Simple timeouts work for small areas, but if your target area is large it may execute regardless of intent. That's where hoverIntent comes in...</p>
+    <p>Also the TAB key can be used to navigate through the elements, which jQuery's hover() can't.</p>
     <p style="text-align:center;"><a href="https://github.com/briancherne/jquery-hoverIntent">https://github.com/briancherne/jquery-hoverIntent</a></p>
 
     <h2>Examples</h2>
@@ -80,7 +81,7 @@
     </ul>
     <p>jQuery's built-in hover calls handlerIn and handlerOut functions immediately. If you move your cursor back and forth quickly across the tiles you'll see how the immediate execution can lead to problems.</p>
 
-    <h3>.hoverIntent( handlerIn, handlerOut ) with links (tab navigation)</h3>
+    <h3>.hoverIntent( handlerIn, handlerOut )</h3>
     <pre>$("#demo2 li").hoverIntent( makeTall, makeShort );</pre>
     <ul class="demo" id="demo2">
         <li class="p1"><a href="#">Link 1</a></li>
