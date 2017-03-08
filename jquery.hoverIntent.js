@@ -149,7 +149,7 @@
             } else { // "mouseleave" or "focusout"
                 // do nothing if not already active
                 if (!state.isActive) { return; }
-                // unbind expensive mousemove event if mouseleave
+                // unbind expensive mousemove event
                 $el.off(mousemove,track);
                 // if hoverIntent state is true, then call the mouseOut function after the specified delay
                 state.timeoutId = setTimeout( function(){delay(ev,$el,state,cfg.out);} , cfg.timeout );
