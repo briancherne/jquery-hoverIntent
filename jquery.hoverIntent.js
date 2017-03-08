@@ -30,7 +30,7 @@
  * @author Brian Cherne <brian(at)cherne(dot)net>
  */
 
-;(function(factory) {
+(function(factory) {
     'use strict';
     if (typeof define === 'function' && define.amd) {
         define(['jquery'], factory);
@@ -62,7 +62,9 @@
     // compares current and previous mouse positions
     var compare = function(ev,$el,s,cfg) {
         // compare mouse positions to see if pointer has slowed enough to trigger `over` function
-        if ( Math.sqrt( (s.pX-cX)*(s.pX-cX) + (s.pY-cY)*(s.pY-cY) ) < cfg.sensitivity ) {
+        if (ev.type == 'focusin' || ev.type == 'focusout') {
+            return cfg.over.apply($el[0],[ev]);
+        }else if ( Math.sqrt( (s.pX-cX)*(s.pX-cX) + (s.pY-cY)*(s.pY-cY) ) < cfg.sensitivity) {
             $el.off(s.event,track);
             delete s.timeoutId;
             // set hoverIntent state as active for this element (permits `out` handler to trigger)
@@ -133,7 +135,7 @@
             var mousemove = state.event = 'mousemove.hoverIntent.hoverIntent'+instanceId;
 
             // handle the event, based on its type
-            if (e.type === 'mouseenter') {
+            if (e.type === 'mouseenter' || e.type === 'focusin') {
                 // do nothing if already active
                 if (state.isActive) { return; }
                 // set "previous" X and Y position based on initial entry point
@@ -142,10 +144,12 @@
                 $el.off(mousemove,track).on(mousemove,track);
                 // start polling interval (self-calling timeout) to compare mouse coordinates over time
                 state.timeoutId = setTimeout( function(){compare(ev,$el,state,cfg);} , cfg.interval );
-            } else { // "mouseleave"
+            } else if(e.type === 'focusout') {
+                state.timeoutId = setTimeout( function(){delay(ev,$el,state,cfg.out);} , cfg.timeout );
+            } else { // "mouseleave" or "focusout"
                 // do nothing if not already active
                 if (!state.isActive) { return; }
-                // unbind expensive mousemove event
+                // unbind expensive mousemove event if mouseleave
                 $el.off(mousemove,track);
                 // if hoverIntent state is true, then call the mouseOut function after the specified delay
                 state.timeoutId = setTimeout( function(){delay(ev,$el,state,cfg.out);} , cfg.timeout );
@@ -153,6 +157,14 @@
         };
 
         // listen for mouseenter and mouseleave
-        return this.on({'mouseenter.hoverIntent':handleHover,'mouseleave.hoverIntent':handleHover}, cfg.selector);
+        return this.on(
+            {
+                'mouseenter.hoverIntent':handleHover,
+                'mouseleave.hoverIntent':handleHover,
+                'focusin.hoverIntent':handleHover,
+                'focusout.hoverIntent':handleHover
+            },
+            cfg.selector
+        );
     };
 });

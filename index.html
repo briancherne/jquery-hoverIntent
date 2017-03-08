@@ -54,7 +54,7 @@
 
         function makeTall(){$(this).animate({"height":75},200);}
         function makeShort(){$(this).animate({"height":50},200);}
-        function toggleHeight(e){var h=(e.type==="mouseenter") ? 75 : 50; $(this).stop().animate({"height":h},200);}
+        function toggleHeight(e){var h=(e.type==="mouseenter" ||e.type==="focusin") ? 75 : 50; $(this).stop().animate({"height":h},200);}
     </script>
 
 </head>
@@ -73,50 +73,50 @@
     <h3>jQuery's .hover() ... for reference</h3>
     <pre>$("#demo1 li").hover( makeTall, makeShort );</pre>
     <ul class="demo" id="demo1">
-        <li class="p1">&nbsp;</li>
-        <li class="p2">&nbsp;</li>
-        <li class="p3">&nbsp;</li>
-        <li class="p4"><span>hover ignores over/out events from children</span></li>
+        <li class="p1"><a href="#">Link 1</a></li>
+        <li class="p2"><a href="#">Link 2</a></li>
+        <li class="p3"><a href="#">Link 3</a></li>
+        <li class="p4"><a href="#">Link 4</a><span>hover ignores over/out events from children</span></li>
     </ul>
     <p>jQuery's built-in hover calls handlerIn and handlerOut functions immediately. If you move your cursor back and forth quickly across the tiles you'll see how the immediate execution can lead to problems.</p>
 
-    <h3>.hoverIntent( handlerIn, handlerOut )</h3>
+    <h3>.hoverIntent( handlerIn, handlerOut ) with links (tab navigation)</h3>
     <pre>$("#demo2 li").hoverIntent( makeTall, makeShort );</pre>
     <ul class="demo" id="demo2">
-        <li class="p1">&nbsp;</li>
-        <li class="p2">&nbsp;</li>
-        <li class="p3">&nbsp;</li>
-        <li class="p4"><span>hoverIntent also ignores over/out events from children</span></li>
+        <li class="p1"><a href="#">Link 1</a></li>
+        <li class="p2"><a href="#">Link 2</a></li>
+        <li class="p3"><a href="#">Link 3</a></li>
+        <li class="p4"><a href="#">Link 4</a><span>hoverIntent also ignores over/out events from children</span></li>
     </ul>
     <p>hoverIntent is interchangeable with jQuery's hover. It can use the same exact handlerIn and handlerOut functions. It passes the same <strong>this</strong> and <strong>event</strong> objects to those functions.</p>
 
     <h3>.hoverIntent( handlerInOut )</h3>
     <pre>$("#demo3 li").hoverIntent( toggleHeight );</pre>
     <ul class="demo" id="demo3">
-        <li class="p1">&nbsp;</li>
-        <li class="p2">&nbsp;</li>
-        <li class="p3">&nbsp;</li>
-        <li class="p4">&nbsp;</li>
+        <li class="p1"><a href="#">Link 1</a></li>
+        <li class="p2"><a href="#">Link 2</a></li>
+        <li class="p3"><a href="#">Link 3</a></li>
+        <li class="p4"><a href="#">Link 4</a></li>
     </ul>
     <p>hoverIntent can also take a single handlerInOut, just like jQuery's hover.</p>
 
     <h3>.hoverIntent( handlerIn, handlerOut, selector )</h3>
     <pre>$("#demo4").hoverIntent( makeTall, makeShort, 'li' );</pre>
     <ul class="demo" id="demo4">
-        <li class="p1">&nbsp;</li>
-        <li class="p2">&nbsp;</li>
-        <li class="p3">&nbsp;</li>
-        <li class="p4">&nbsp;</li>
+        <li class="p1"><a href="#">Link 1</a></li>
+        <li class="p2"><a href="#">Link 2</a></li>
+        <li class="p3"><a href="#">Link 3</a></li>
+        <li class="p4"><a href="#">Link 4</a></li>
     </ul>
     <p>Unlike jQuery's hover, hoverIntent supports event delegation! Just pass in a selector of a descendant element.</p>
 
     <h3>.hoverIntent( handlerInOut, selector )</h3>
     <pre>$("#demo5").hoverIntent( toggleHeight, 'li' );</pre>
     <ul class="demo" id="demo5">
-        <li class="p1">&nbsp;</li>
-        <li class="p2">&nbsp;</li>
-        <li class="p3">&nbsp;</li>
-        <li class="p4">&nbsp;</li>
+        <li class="p1"><a href="#">Link 1</a></li>
+        <li class="p2"><a href="#">Link 2</a></li>
+        <li class="p3"><a href="#">Link 3</a></li>
+        <li class="p4"><a href="#">Link 4</a></li>
     </ul>
     <p>Unlike jQuery's hover, hoverIntent supports event delegation with handlerInOut.</p>
 
@@ -129,10 +129,10 @@ $("#demo6").hoverIntent({
 });
 </pre>
     <ul class="demo" id="demo6">
-        <li class="p1">&nbsp;</li>
-        <li class="p2">&nbsp;</li>
-        <li class="p3">&nbsp;</li>
-        <li class="p4">&nbsp;</li>
+        <li class="p1"><a href="#">Link 1</a></li>
+        <li class="p2"><a href="#">Link 2</a></li>
+        <li class="p3"><a href="#">Link 3</a></li>
+        <li class="p4"><a href="#">Link 4</a></li>
     </ul>
     <p>To control hoverIntent more precisely and override the default configuration options, pass it an object as the first parameter. The object must at least contain an "over" function. If the "over" function is sent alone, it will act just like handlerInOut.</p>
 
