@@ -1,6 +1,6 @@
 {
   "name": "jquery-hoverintent",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "homepage": "http://cherne.net/brian/resources/jquery.hoverIntent.html",
   "repository": {
     "type": "git",
@@ -22,6 +22,6 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "jquery": "1.9.1"
+    "jquery": ">=1.9.1"
   }
 }
