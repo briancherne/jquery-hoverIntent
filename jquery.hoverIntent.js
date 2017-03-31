@@ -82,9 +82,9 @@
     };
 
     // triggers given `out` function at configured `timeout` after a mouseleave and clears state
-    var delay = function(ev,$el,s,out) {
+    var delayOut = function(ev,$el,s,cfg) {
         delete $el.data('hoverIntent')[s.id];
-        return out.apply($el[0],[ev]);
+        return cfg.out.apply($el[0],[ev]);
     };
 
     // triggers given `over` function at configured `timeout` after a mouseenter and clears state
@@ -159,7 +159,7 @@
                 // unbind expensive mousemove event
                 $el.off(mousemove,track);
                 // if hoverIntent state is true, then call the mouseOut function after the specified delay
-                state.timeoutId = setTimeout( function(){delay(ev,$el,state,cfg.out);} , cfg.timeout[1] );
+                state.timeoutId = setTimeout( function(){delayOut(ev,$el,state,cfg);} , cfg.timeout[1] );
             }
         };
 
