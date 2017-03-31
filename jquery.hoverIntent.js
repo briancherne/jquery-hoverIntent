@@ -1,5 +1,5 @@
 /*!
- * hoverIntent v1.8.1 // 2014.08.11 // jQuery v1.9.1+
+ * hoverIntent v1.9.1 // 2017.03.30 // jQuery v1.9.1+
  * http://briancherne.github.io/jquery-hoverIntent/
  *
  * You may use hoverIntent under the terms of the MIT license. Basically that
@@ -44,7 +44,7 @@
     var _cfg = {
         interval: 100,
         sensitivity: 6,
-        timeout: 0
+        timeout: [0,0]
     };
 
     // counter used to generate an ID for each instance
@@ -71,7 +71,8 @@
             ev.pageX = cX; ev.pageY = cY;
             // clear coordinate data from state object
             delete s.pX; delete s.pY;
-            return cfg.over.apply($el[0],[ev]);
+            // trigger mouseover with specified delay
+            s.timeoutId = setTimeout( function(){delayOver(ev, $el, s, cfg);} , cfg.timeout[0]);
         } else {
             // set previous coordinates for next comparison
             s.pX = cX; s.pY = cY;
@@ -81,9 +82,15 @@
     };
 
     // triggers given `out` function at configured `timeout` after a mouseleave and clears state
-    var delay = function(ev,$el,s,out) {
+    var delayOut = function(ev,$el,s,cfg) {
         delete $el.data('hoverIntent')[s.id];
-        return out.apply($el[0],[ev]);
+        return cfg.out.apply($el[0],[ev]);
+    };
+
+    // triggers given `over` function at configured `timeout` after a mouseenter and clears state
+    var delayOver = function(ev,$el,s,cfg) {
+        delete s.timeoutId;
+        return cfg.over.apply($el[0],[ev]);
     };
 
     $.fn.hoverIntent = function(handlerIn,handlerOut,selector) {
@@ -101,6 +108,10 @@
             cfg = $.extend(cfg, { over: handlerIn, out: handlerOut, selector: selector } );
         } else {
             cfg = $.extend(cfg, { over: handlerIn, out: handlerIn, selector: handlerOut } );
+        }
+        // Backwards compatibility for single value timeouts that only apply to mouseout
+        if ( typeof cfg.timeout === "number") {
+            cfg = $.extend(cfg, { timeout: [ 0, cfg.timeout ]})
         }
 
         // A private function for handling mouse 'hovering'
@@ -121,7 +132,7 @@
 
             // state properties:
             // id = instance ID, used to clean up data
-            // timeoutId = timeout ID, reused for tracking mouse position and delaying "out" handler
+            // timeoutId = timeout ID, reused for tracking mouse position and delaying "out" or "over" handlers
             // isActive = plugin state, true after `over` is called just until `out` is called
             // pX, pY = previously-measured pointer coordinates, updated at each polling interval
             // event = string representing the namespaced event used for mouse tracking
@@ -148,7 +159,7 @@
                 // unbind expensive mousemove event
                 $el.off(mousemove,track);
                 // if hoverIntent state is true, then call the mouseOut function after the specified delay
-                state.timeoutId = setTimeout( function(){delay(ev,$el,state,cfg.out);} , cfg.timeout );
+                state.timeoutId = setTimeout( function(){delayOut(ev,$el,state,cfg);} , cfg.timeout[1] );
             }
         };
 
