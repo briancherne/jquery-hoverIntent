@@ -36,7 +36,7 @@
         var cfg = {
             interval: 100,
             sensitivity: 6,
-            timeout: 0
+            timeout: [0,0]
         };
 
         if ( typeof handlerIn === "object" ) {
@@ -45,6 +45,12 @@
             cfg = $.extend(cfg, { over: handlerIn, out: handlerOut, selector: selector } );
         } else {
             cfg = $.extend(cfg, { over: handlerIn, out: handlerIn, selector: handlerOut } );
+        }
+
+        // Backwards compatibility for single value timeouts. Previous versions only supported
+        // mouseout delays and not mousein
+        if ( typeof cfg.timeout === "number") {
+            cfg = $.extend(cfg, { timeout: [ 0, cfg.timeout ]})
         }
 
         // instantiate variables
@@ -82,6 +88,13 @@
             return cfg.out.apply(ob,[ev]);
         };
 
+        // A private function for delaying the mouseOver function
+        var delayOver = function(ev,ob) {
+            ob.hoverIntent_t = clearTimeout(ob.hoverIntent_t);
+            ob.hoverIntent_s = true;
+            return cfg.over.apply(ob,[ev]);
+        };
+
         // A private function for handling mouse 'hovering'
         var handleHover = function(e) {
             // copy objects to be passed into t (required for event object to be passed in IE)
@@ -97,15 +110,22 @@
                 pX = ev.pageX; pY = ev.pageY;
                 // update "current" X and Y position based on mousemove
                 $(ob).on("mousemove.hoverIntent",track);
-                // start polling interval (self-calling timeout) to compare mouse coordinates over time
-                if (!ob.hoverIntent_s) { ob.hoverIntent_t = setTimeout( function(){compare(ev,ob);} , cfg.interval );}
+                
+                if (ob.hoverIntent_s) {
+                    // When mousein state is already active, start polling interval (self-calling timeout) to compare mouse coordinates over time
+                    ob.hoverIntent_t = setTimeout( function(){compare(ev,ob);} , cfg.interval );
+                } else {
+                    // When mousing in for the first time, start a delay
+                    ob.hoverIntent_t = setTimeout( function(){delayOver(ev,ob);} , cfg.timeout[0] );
+                }
+
 
                 // else e.type == "mouseleave"
             } else {
                 // unbind expensive mousemove event
                 $(ob).off("mousemove.hoverIntent",track);
                 // if hoverIntent state is true, then call the mouseOut function after the specified delay
-                if (ob.hoverIntent_s) { ob.hoverIntent_t = setTimeout( function(){delay(ev,ob);} , cfg.timeout );}
+                if (ob.hoverIntent_s) { ob.hoverIntent_t = setTimeout( function(){delay(ev,ob);} , cfg.timeout[1] );}
             }
         };
 

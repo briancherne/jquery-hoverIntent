@@ -144,7 +144,8 @@ $("#demo6").hoverIntent({
         <p>The handlerOut function you'd like to call on "mouseleave after timeout". Your function receives the same "this" and "event" objects as it would from jQuery's hover method. Note, hoverIntent will only call the "out" function if the "over" function has been called.</p>
 
         <h3>timeout:</h3>
-        <p>A simple delay, in milliseconds, before the "out" function is called. If the user mouses back over the element before the timeout has expired the "out" function will not be called (nor will the "over" function be called). This is primarily to protect against sloppy/human mousing trajectories that temporarily (and unintentionally) take the user off of the target element... giving them time to return. <em>Default timeout: 0</em></p>
+        <p>A simple delay, in milliseconds, before the "out" function is called. If the user mouses back over the element before the timeout has expired the "out" function will not be called (nor will the "over" function be called). This is primarily to protect against sloppy/human mousing trajectories that temporarily (and unintentionally) take the user off of the target element... giving them time to return.</p>
+        <p>When provided a single numeric value, timeout will only delay the "out" function. When provided an array like <em>[500,500]</em>, the first value will delay the "over" function, and the second value will delay the "out" function.<br/><em>Default timeout: [0,0]</em></p>
 
         <h3>selector:</h3>
         <p>A selector string for event delegation. Used to filter the descendants of the selected elements that trigger the event. If the selector is null or omitted, the event is always triggered when it reaches the selected element. Read <a href="http://api.jquery.com/on/#direct-and-delegated-events">jQuery's API Documentation for the .on() method</a> for more information.</p>
