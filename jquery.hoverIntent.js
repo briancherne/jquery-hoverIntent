@@ -151,7 +151,7 @@
                 state.pX = ev.pageX; state.pY = ev.pageY;
                 // update "current" X and Y position based on mousemove
                 $el.off(mousemove,track).on(mousemove,track);
-                // update polling interval (self-calling timeout) to compare mouse coordinates over time
+                // start polling interval (self-calling timeout) to compare mouse coordinates over time
                 state.timeoutId = setTimeout( function(){compare(ev,$el,state,cfg);} , cfg.interval );
             } else { // "mouseleave"
                 // do nothing if not already active
