@@ -1,5 +1,5 @@
 /*!
- * hoverIntent v1.9.0 // 2017.09.03 // jQuery v1.7.0+
+ * hoverIntent v1.9.0 // 2017.09.01 // jQuery v1.7.0+
  * http://briancherne.github.io/jquery-hoverIntent/
  *
  * You may use hoverIntent under the terms of the MIT license. Basically that
