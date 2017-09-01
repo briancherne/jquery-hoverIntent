@@ -1,0 +1,46 @@
+{
+  "name": "jquery-hoverIntent",
+  "version": "1.9.0",
+  "description": "A jQuery plug-in that attempts to determine the user's intent on mouseover. To delay or prevent the accidental firing of callbacks.",
+  "keywords": [
+    "browser",
+    "delay",
+    "events",
+    "hover",
+    "hoverintent",
+    "intent",
+    "jquery",
+    "jquery-plugin",
+    "mouse",
+    "mouseenter",
+    "mouseover",
+    "plugin"
+  ],
+  "main": "jquery.hoverIntent.js",
+  "homepage": "http://briancherne.github.io/jquery-hoverIntent/",
+  "author": "Brian Cherne <brian@cherne.net>",
+  "contributors": [
+    "usmonster (https://github.com/usmonster)"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/briancherne/jquery-hoverIntent.git"
+  },
+  "bugs": {
+    "url": "https://github.com/briancherne/jquery-hoverIntent/issues"
+  },
+  "dependencies": {
+    "jquery": ">=1.7.0"
+  },
+  "peerDependencies": {
+    "jquery": ">=1.7.0"
+  },
+  "devDependencies": {
+    "uglify-js": "^3.0.28"
+  },
+  "scripts": {
+    "build": "uglifyjs jquery.hoverIntent.js -c --comments '/^!/' -o jquery.hoverIntent.min.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "MIT"
+}
