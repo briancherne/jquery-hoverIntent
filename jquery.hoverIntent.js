@@ -1,5 +1,5 @@
 /*!
- * hoverIntent v1.9.0 // 2017.09.01 // jQuery v1.7.0+
+ * hoverIntent v1.9.0 // 2018.09.05 // jQuery v1.7.0+
  * http://briancherne.github.io/jquery-hoverIntent/
  *
  * You may use hoverIntent under the terms of the MIT license. Basically that
@@ -134,8 +134,8 @@
 
             // handle the event, based on its type
             if (e.type === 'mouseenter') {
-                // do nothing if already active
-                if (state.isActive) { return; }
+                // do nothing if already active or mouse left button is down
+                if (state.isActive || e.buttons === 1) { return; }
                 // set "previous" X and Y position based on initial entry point
                 state.pX = ev.pageX; state.pY = ev.pageY;
                 // update "current" X and Y position based on mousemove
