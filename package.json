@@ -1,6 +1,6 @@
 {
   "name": "jquery-hoverintent",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "description": "A jQuery plugin that attempts to determine the user's intent on mouseover and thus delay or prevent the accidental firing of callbacks.",
   "keywords": [
     "browser",
@@ -36,7 +36,7 @@
     "jquery": ">=1.7.0"
   },
   "devDependencies": {
-    "uglify-js": "^3.0.28"
+    "uglify-js": "^3.4.9"
   },
   "scripts": {
     "build": "uglifyjs jquery.hoverIntent.js -c --comments '/^!/' -o jquery.hoverIntent.min.js",
