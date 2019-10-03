@@ -17,6 +17,7 @@
     "plugin"
   ],
   "main": "jquery.hoverIntent.js",
+  "types": "jquery.hoverIntent.d.ts",
   "homepage": "http://briancherne.github.io/jquery-hoverIntent/",
   "author": "Brian Cherne <brian@cherne.net>",
   "contributors": [
@@ -30,7 +31,8 @@
     "url": "https://github.com/briancherne/jquery-hoverIntent/issues"
   },
   "dependencies": {
-    "jquery": ">=1.7.0"
+    "jquery": ">=1.7.0",
+    "@types/jquery": "latest"
   },
   "peerDependencies": {
     "jquery": ">=1.7.0"

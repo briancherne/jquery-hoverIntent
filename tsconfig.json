@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "strictNullChecks": true,
+        "strictFunctionTypes": true,
+        "noEmit": true,
+        "esModuleInterop": true
+    },
+    "files": [
+        "jquery.hoverIntent.d.ts",
+        "jquery.hoverIntent-test.ts"
+    ]
+}
