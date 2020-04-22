@@ -92,6 +92,11 @@
         return out.apply($el[0],[ev]);
     };
 
+    // checks if `value` is a function
+    var isFunction = function (value) {
+        return typeof value === 'function';
+    };
+
     $.fn.hoverIntent = function(handlerIn,handlerOut,selector) {
         // instance ID, used as a key to store and retrieve state information on an element
         var instanceId = INSTANCE_COUNT++;
@@ -100,10 +105,10 @@
         var cfg = $.extend({}, _cfg);
         if ( $.isPlainObject(handlerIn) ) {
             cfg = $.extend(cfg, handlerIn);
-            if ( !$.isFunction(cfg.out) ) {
+            if ( !isFunction(cfg.out) ) {
                 cfg.out = cfg.over;
             }
-        } else if ( $.isFunction(handlerOut) ) {
+        } else if ( isFunction(handlerOut) ) {
             cfg = $.extend(cfg, { over: handlerIn, out: handlerOut, selector: selector } );
         } else {
             cfg = $.extend(cfg, { over: handlerIn, out: handlerIn, selector: handlerOut } );
