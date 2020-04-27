@@ -1,5 +1,5 @@
 /*!
- * hoverIntent v1.10.1 // 2019.10.05 // jQuery v1.7.0+
+ * hoverIntent v1.10.2 // 2020.04.28 // jQuery v1.7.0+
  * http://briancherne.github.io/jquery-hoverIntent/
  *
  * You may use hoverIntent under the terms of the MIT license. Basically that
@@ -93,7 +93,7 @@
     };
 
     // checks if `value` is a function
-    var isFunction = function (value) {
+    var isFunction = function(value) {
         return typeof value === 'function';
     };
 
