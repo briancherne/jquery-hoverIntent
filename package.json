@@ -1,6 +1,6 @@
 {
   "name": "jquery-hoverintent",
-  "version": "1.10.1",
+  "version": "1.10.2",
   "description": "A jQuery plugin that attempts to determine the user's intent on mouseover and thus delay or prevent the accidental firing of callbacks.",
   "keywords": [
     "browser",
